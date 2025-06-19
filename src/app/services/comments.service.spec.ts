@@ -2,7 +2,9 @@ import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { CommentsService } from './comments.service';
 import { API_URL } from '../utils/resources';
+// import {COMMENT_DATA} from '../../../src/app/db.json';
 
+// configure the test module for CommentsService
 describe('CommentsService', () => {
   let service: CommentsService;
   let httpMock: HttpTestingController;
@@ -20,14 +22,16 @@ describe('CommentsService', () => {
     httpMock.verify();
   });
 
+  // Test cases for CommentsService
+
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
 
   it('should fetch all comments', () => {
     const dummyComments = [{ id: 1, text: 'Test comment' }];
-    service.getAllComments().subscribe(comments => {
-      expect(comments).toEqual(dummyComments);
+    service.getAllComments().subscribe(allcomments => {
+      expect(allcomments).toEqual(dummyComments);
     });
     const req = httpMock.expectOne(`${API_URL}/comments`);
     expect(req.request.method).toBe('GET');
