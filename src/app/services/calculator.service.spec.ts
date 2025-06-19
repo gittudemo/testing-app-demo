@@ -7,16 +7,14 @@ describe("calculator service", () => {
   let mockLogger: any;
 
   beforeEach(() => {
-    mockLogger = jasmine.createSpy('log') ;
-    // calculator = new CalculatorService(mockLogger);  //write common code in beforeEach
-
-    //use TestBed to create the service instance
+    mockLogger = jasmine.createSpyObj('LoggerService', ['log']);
     TestBed.configureTestingModule({
       providers: [
         CalculatorService,
-        { provide: 'LoggerService', useValue: mockLogger } // Mock LoggerService
+        { provide: 'LoggerService', useValue: mockLogger }
       ]
     });
+    calculator = TestBed.inject(CalculatorService);
   });
 
   it("should add two numbers", () => {
