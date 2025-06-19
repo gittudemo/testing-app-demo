@@ -1,4 +1,5 @@
 import { CalculatorService } from "./calculator.service";
+import { TestBed } from '@angular/core/testing';
 
 describe("calculator service", () => {
   let calculator: any;
@@ -7,7 +8,15 @@ describe("calculator service", () => {
 
   beforeEach(() => {
     mockLogger = jasmine.createSpy('log') ;
-    calculator = new CalculatorService(mockLogger);  //write common code in beforeEach
+    // calculator = new CalculatorService(mockLogger);  //write common code in beforeEach
+
+    //use TestBed to create the service instance
+    TestBed.configureTestingModule({
+      providers: [
+        CalculatorService,
+        { provide: 'LoggerService', useValue: mockLogger } // Mock LoggerService
+      ]
+    });
   });
 
   it("should add two numbers", () => {
