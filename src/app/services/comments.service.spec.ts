@@ -40,8 +40,11 @@ describe('CommentsService', () => {
 
   it('should fetch a comment by id', () => {
     const dummyComment = { id: 1, text: 'Test comment' };
+    const id = 1;
     service.getCommentById(1).subscribe(comment => {
       expect(comment).toEqual(dummyComment);
+      // expect(comment.id).toBe(1);
+      // expect(comment.text).toBe('Test comment');
     });
     const req = httpMock.expectOne(`${API_URL}/comments/1`);
     expect(req.request.method).toBe('GET');
